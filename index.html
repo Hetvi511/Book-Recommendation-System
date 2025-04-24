@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommender System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f5f0e6;
+            color: #3e2f1c;
+            font-family: 'Georgia', serif;
+        }
+
+        .navbar {
+    background-color: #4b3f30; /* deep beige for navbar */
+    border-radius: 0;
+    margin-bottom: 40px;
+    }
+
+        .navbar-brand {
+            color: #f5f0e6 !important;
+            font-weight: bold;
+            font-size: 20px;
+            padding-left: 20px;
+            letter-spacing: 1px;
+        }
+
+        .navbar-nav > li > a {
+            color: #f5f0e6 !important;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 12px 18px;
+            border-radius: 8px;
+            transition: background-color 0.3s, color 0.3s;
+            margin: 0 5px;
+        }
+
+        .navbar-nav > li > a:hover {
+            background-color: #d4a373;
+            color: #4b3f30 !important;
+        }
+
+        h1 {
+            color: #3e2f1c;
+            font-size: 48px;
+            margin-top: 30px;
+            font-weight: bold;
+        }
+
+        .card {
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #d9c3a2;
+            box-shadow: 2px 2px 8px rgba(75, 63, 48, 0.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .card-body p {
+            color: #4b3f30;
+            font-size: 16px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .card-body h4 {
+            color: #6d5c45;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">Whispering Pages</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/recommend">Recommend</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Top 50 Books</h1>
+            </div>
+
+            {% for i in range(book_name|length) %}
+                {% if i % 4 == 0 %}
+                    <div class="row" style="margin-bottom: 30px">
+                {% endif %}
+
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="card-img-top" src="{{ image[i] }}">
+                            <p>{{ book_name[i] }}</p>
+                            <h4>{{ author[i] }}</h4>
+                            <h4>Votes - {{ votes[i] }}</h4>
+                            <h4>Rating - {{ rating[i]|round(1) }}</h4>
+                        </div>
+                    </div>
+                </div>
+
+    {% if i % 4 == 3 or i == book_name|length - 1 %}
+        </div>  <!-- close the row -->
+    {% endif %}
+{% endfor %}
+
+        </div>
+    </div>
+
+</body>
+</html>
